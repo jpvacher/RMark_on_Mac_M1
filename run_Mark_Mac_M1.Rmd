@@ -3,6 +3,7 @@ title: "How to get Mark run on a Mac M1 - OS 11"
 author: "Jean-Pierre Vacher and Matthieu Boileau"
 date: "9/29/2021"
 output:
+  pdf_document: default
   html_document: default
 ---
 
