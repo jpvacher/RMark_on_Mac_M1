@@ -1,5 +1,6 @@
-#How to get Mark run on a Mac M1 - OS 11
-#by Jean-Pierre Vacher and Matthieu Boileau - 2021.
+# How to get Mark run on a Mac M1 - OS 11
+
+*by Jean-Pierre Vacher and Matthieu Boileau - 2021.*
 
 We wrote a procedure in unix for [RMark](https://cran.r-project.org/web/packages/RMark/index.html) users to get Mark run on Mac with M1 chips under OS 11 (Big Sur).
 
