@@ -92,6 +92,21 @@ sudo pkgutil --forget com.gnu.gfortran
 brew reinstall gcc
 ```
 
+### Run Rjava on a M1 Mac with R v.4.1
+
+Install java to run rJava on Big Sur with R 4.1.1
+
+* go to https://www.oracle.com/index.html
+* click Product -> Software -> Java
+* click Download Java
+* select macOS
+* download Arm 64 DMG installer
+
+Then install JDK17
+
+And it should work!
+
+
 # EN FRANÇAIS
 
 On ouvre le Terminal depuis Rosetta (cocher “open using rosetta” quand on clique command+i sur l'icone du terminal dans les applications).
@@ -172,3 +187,15 @@ sudo rm -rf /usr/local/gfortran /usr/local/bin/gfortran
 sudo pkgutil --forget com.gnu.gfortran
 brew reinstall gcc
 ```
+
+### Faire tourner Rjava sur un Mac à puce M1 dans R v.4.1
+
+* se rendre sur [https://www.oracle.com/index.html](https://www.oracle.com/index.html)
+* cliquer sur Product -> Software -> Java
+* cliquer Download Java
+* selectionner macOS
+* télécharger Arm 64 DMG installer
+
+Puis, installer JDK17
+
+Cela devrait fonctionner maintenant !
