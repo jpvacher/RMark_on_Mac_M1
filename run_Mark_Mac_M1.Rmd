@@ -96,7 +96,7 @@ brew reinstall gcc
 
 Install java to run rJava on Big Sur with R 4.1.1
 
-* go to https://www.oracle.com/index.html
+* go to [https://www.oracle.com/index.html](https://www.oracle.com/index.html)
 * click Product -> Software -> Java
 * click Download Java
 * select macOS
