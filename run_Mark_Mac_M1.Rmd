@@ -1,0 +1,174 @@
+---
+title: "How to get Mark run on a Mac M1 - OS 11"
+author: "Jean-Pierre Vacher and Matthieu Boileau"
+date: "9/29/2021"
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Open a Terminal console from Rosetta (tick “open using rosetta” after clicking command+i on the Terminal icon from the Applications folder. The Terminal is in the Utilities subfolder).
+
+Architecture problem of the gfortran librairies, which are in arm64 on M1 chips and should be in x86_64 to run Mark.
+
+To check which architecture the dynamic libraries use, type and execute the following code in the Terminal:
+```{bash, eval=FALSE}
+
+cd /usr/local/lib/
+file libgfortran.5.dylib
+
+cd /usr/local/lib/
+file libgfortran.3.dylib
+```
+
+Locate the correct directory:
+```{bash, eval=FALSE}
+cd /usr/local/bin/
+otool -L ./mark
+```
+
+
+Check which version and where it is stored:
+```{bash, eval=FALSE}
+find /usr/local/ -name "libgfortran*"
+find /usr/local/ -name "libgomp*"
+find /usr/local/ -name "libquadmath*"
+```
+
+
+Charge an older version of gcc:
+```{bash, eval=FALSE}
+brew search gcc
+```
+
+Chose v.8 as it has a x86_64 architecture:
+```{bash, eval=FALSE}
+brew reinstall gcc@8
+```
+
+create symbolic links:
+```{bash, eval=FALSE}
+cd /usr/local/lib/ #this command enables to be in the correct directory right away
+
+sudo ln -s /usr/local//Cellar/gcc/11.1.0/lib/gcc/11 lib #we add lib if we are not in the correct directory, otherwise it's not needed
+sudo ln -s /usr/local//Cellar/gcc@5/5.5.0_6/lib/gcc/5
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/libgfortran.5.dylib
+sudo ln -s /usr/local//Cellar/gcc@10/10.3.0/lib/gcc/10/libgfortran.5.dylib
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/libgomp.1.dylib
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/libquadmath.0.dylib
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/strataG.so
+sudo ln -s /Library/Java/JavaVirtualMachines/adoptopenjdk-16.jdk/Contents/Home/lib/server/libjvm.dylib
+```
+
+
+Delete a directory (delete symbolic link):
+```{bash, eval=FALSE}
+rm -rf
+```
+
+Check which architecture dynamic libraries use:
+```{bash, eval=FALSE}
+cd /usr/local/lib/
+file libgfortran.5.dylib
+
+cd /usr/local/lib/
+file libgfortran.3.dylib
+file libjvm.dylib
+```
+
+Now it should work!
+
+## Other stuff
+gcc intel for rosetta.
+
+Reinstall gcc with rosetta:
+```{bash, eval=FALSE}
+sudo rm -rf /usr/local/gfortran /usr/local/bin/gfortran
+sudo pkgutil --forget com.gnu.gfortran
+brew reinstall gcc
+```
+
+# EN FRANÇAIS
+
+On ouvre le Terminal depuis Rosetta (cocher “open using rosetta” quand on clique command+i sur l'icone du terminal dans les applications).
+
+
+Problème d'architecture des librairies gfortran, qui sont en arm64 sur les puces M1 et qui nécessitent d'être en x86_64 pour faire tourner Mark.
+
+Pour voir quelle architecture les bibliothèques dynamiques utilisent :
+```{bash, eval=FALSE}
+cd /usr/local/lib/
+file libgfortran.5.dylib
+
+cd /usr/local/lib/
+file libgfortran.3.dylib
+```
+
+Se mettre dans le répertoire :
+```{bash, eval=FALSE}
+cd /usr/local/bin/
+otool -L ./mark
+```
+
+Pour voir ce qu'il y a comme version et où c'est rangé :
+```{bash, eval=FALSE}
+find /usr/local/ -name "libgfortran*"
+find /usr/local/ -name "libgomp*"
+find /usr/local/ -name "libquadmath*"
+```
+
+
+Charger une ancienne version de gcc :
+```{bash, eval=FALSE}
+brew search gcc
+```
+
+On choisit la version 8 car elle est en x86_64 :
+```{bash, eval=FALSE}
+brew reinstall gcc@8
+```
+
+Lien symbolique :
+```{bash, eval=FALSE}
+cd /usr/local/lib/
+
+sudo ln -s /usr/local//Cellar/gcc/11.1.0/lib/gcc/11 lib #on ajoute lib si on n'est pas dans le bon répertoire, sinon pas la peine
+sudo ln -s /usr/local//Cellar/gcc@5/5.5.0_6/lib/gcc/5
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/libgfortran.5.dylib
+sudo ln -s /usr/local//Cellar/gcc@10/10.3.0/lib/gcc/10/libgfortran.5.dylib
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/libgomp.1.dylib
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/libquadmath.0.dylib
+sudo ln -s /usr/local//Cellar/gcc@8/8.5.0/lib/gcc/8/strataG.so
+sudo ln -s /Library/Java/JavaVirtualMachines/adoptopenjdk-16.jdk/Contents/Home/lib/server/libjvm.dylib
+```
+
+Pour supprimer un répertoire (supprimer le lien symbolique) :
+```{bash, eval=FALSE}
+rm -rf
+```
+
+Pour voir quel architecture les libraries dynamiques utilisent :
+```{bash, eval=FALSE}
+cd /usr/local/lib/
+file libgfortran.5.dylib
+
+cd /usr/local/lib/
+file libgfortran.3.dylib
+file libjvm.dylib
+```
+
+Maintenant, cela devrait fonctionner !
+
+## Autres trucs
+gcc intel pour rosetta.
+
+Pour réinstaller gcc avec rosetta :
+```{bash, eval=FALSE}
+sudo rm -rf /usr/local/gfortran /usr/local/bin/gfortran
+sudo pkgutil --forget com.gnu.gfortran
+brew reinstall gcc
+```
