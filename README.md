@@ -6,4 +6,6 @@ We wrote a procedure in unix for [RMark](https://cran.r-project.org/web/packages
 
 This should get RMark run on the latest R version (4.1). We also added a procedure to get Rjava run on a similar configuration in case this should also be an issue when using RMark.
 
+You can see the html version of the page [here](file:///Users/jpvacher/Documents/GitHub/jpvacher.github.io/run_Mark_Mac_M1.html).
+
 Hope this helps!
