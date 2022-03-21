@@ -46,12 +46,12 @@ Charge an older version of gcc:
 brew search gcc
 ```
 
-Chose v.8 as it has a x86_64 architecture:
+Choose v.8 as it has a x86_64 architecture:
 ```{bash, eval=FALSE}
 brew reinstall gcc@8
 ```
 
-create symbolic links:
+Create symbolic links:
 ```{bash, eval=FALSE}
 cd /usr/local/lib/ #this command enables to be in the correct directory right away
 
